@@ -44,6 +44,7 @@ setup(
         'plone.api',
         'setuptools',
         'requests',
+        'pyaml',
     ],
     extras_require={
         'test': [

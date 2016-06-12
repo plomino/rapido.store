@@ -1,6 +1,7 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 import requests
+import yaml
 
 
 class RapidoStore(BrowserView):
@@ -12,10 +13,16 @@ class RapidoStore(BrowserView):
         store_url = 'https://api.github.com/repos/plomino/rapido.store/contents/plugins'
         headers = {'Accept': 'application/vnd.github.v3+json'}
 
-        r = requests.get(store_url, headers=headers)
-        data = r.json()
-        plugins = [content['name'] for content in data
-            if content['type']=='dir']
-        import pdb; pdb.set_trace()
+        req = requests.get(store_url, headers=headers)
+        root = req.json()
+        plugins = [content['name'] for content in root
+            if content['type'] == 'dir']
+
+        data = []
+        for plugin in plugins:
+            req = requests.get(store_url, headers=headers)
+            data.append(yaml.load(req.text()))
+
+        self.plugins = data
 
         return self.template()
