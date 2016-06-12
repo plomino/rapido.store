@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<layers>
+  <layer
+    name="rapido.store"
+    interface="rapido.store.interfaces.IRapidoStoreLayer"
+  />
+</layers>
