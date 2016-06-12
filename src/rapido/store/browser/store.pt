@@ -24,7 +24,33 @@
   </div>
 
   <div id="layout-contents">
-    hello
+    <section id="install-products" class="portlet">
+      <header class="portletHeader">Rapido plugins</header>
+      <section>
+        <ul class="configlets">
+        <li tal:repeat="plugin view/plugins">
+            <form action="@@rapido-store" method="post" class="pull-right">
+              <input type="hidden" name="plugin_id"
+              tal:attributes="value plugin/id">
+              <input class="context" type="submit" value="Install" name="install">
+            </form>
+
+            <h3 tal:content="plugin/settings/title">
+              My plugin
+            </h3>
+            <p class="configletDescription discreet"
+            tal:content="plugin/settings/description">
+              description
+            </p>
+            <p class="configletDescription discreet">
+              <i>from <a tal:attributes="href plugin/url"
+                tal:content="plugin/url" target="_new"/></i>
+            </p>
+          </li>
+        </ul>
+      </section>
+    </section>
+
   </div>
 
 </div>
